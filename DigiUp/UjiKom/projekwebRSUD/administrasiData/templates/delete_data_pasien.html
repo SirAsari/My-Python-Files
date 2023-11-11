@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Hapus Data Pasien</h2>
+  <p>Apakah anda yakin ingin menghapus {{ Data.namaPasien }}?</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+  </form>
+{% endblock content %}

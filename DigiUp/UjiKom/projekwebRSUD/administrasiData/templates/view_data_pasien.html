@@ -1,0 +1,18 @@
+<!-- templates/view_data_pasien.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="color:green">Administrasi Data Pasien dan Tindakan</h2>
+<h3>View data : {{Data.noRekamMedis}} {{Data.namaPasien}}</h3>
+<br>
+  <div>
+    <p><strong>No Rekam Medis:</strong> {{ Data.noRekamMedis }}</p>
+    <p><strong>Nama Pasien:</strong> {{ Data.namaPasien }}</p>
+    <p><strong>Alamat:</strong> {{ Data.alamat }}</p>
+    <p><strong>Jenis Kelamin:</strong> {{ Data.jenisKelamin }}</p>
+    <p><strong>Tanggal Lahir:</strong> {{ Data.tanggalLahir }}</p>
+    <p><strong>Dokter:</strong> {{ Data.dokter }}</p>
+    <p><strong>Departemen:</strong> {{ Data.departemen }}</p>
+    <p><strong>Diagnosa:</strong> {{ Data.diagnosa }}</p>
+    <p><strong>Tindakan:</strong> {{ Data.tindakan }}</p>
+  </div>
+{% endblock content %}
