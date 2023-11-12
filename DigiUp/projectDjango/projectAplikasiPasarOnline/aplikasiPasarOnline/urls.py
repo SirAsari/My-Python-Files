@@ -1,4 +1,4 @@
-"""bookreviews URL Configuration
+"""aplikasiPasarOnline URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -13,18 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# AplikasiPasarOnline/urls.py
 from django.contrib import admin
-from django.urls import path
-from book import views as bookView
-from django.conf.urls.static import static
+from django.urls import path, include
 from django.conf import settings
+from django.conf.urls.static import static
+from marketplace import views  
 
 urlpatterns = [
-path('/', bookView.home,name='home'),
-path('admin/', admin.site.urls),
-path('about/',bookView.about,name='about'),
-path('contact/',bookView.contact,name='contact'),
-path('book/<int:book_id>/', bookView.book_detail ,name='book_detail'),
+    path('admin/', admin.site.urls),
+    path('marketplace/', include('marketplace.urls')),
 ]
-urlpatterns += static(settings.MEDIA_URL,
-document_root=settings.MEDIA_ROOT)
+
+# Add the following for serving media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

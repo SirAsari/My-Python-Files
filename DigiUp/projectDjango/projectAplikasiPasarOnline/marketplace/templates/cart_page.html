@@ -1,0 +1,35 @@
+<!-- marketplace/templates/marketplace/cart_page.html -->
+{% extends 'marketplace/base.html' %}
+
+{% block title %}Cart Page{% endblock %}
+
+{% block content %}
+    <h2>Cart Page</h2>
+    <!-- Display, create, read, and update orders -->
+    {% for order in orders %}
+        <div>
+            <h3>{{ order.barang.nama }}</h3>
+            <p>Jumlah Pesanan: {{ order.jumlah_pesanan }}</p>
+            <!-- Update the quantity form -->
+            <form method="post" action="{% url 'cart_page' %}">
+                {% csrf_token %}
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <label for="quantity">Jumlah Pesanan:</label>
+                <input type="number" name="quantity" value="{{ order.jumlah_pesanan }}" required>
+                <button type="submit">Update</button>
+            </form>
+            <a href="#">Hapus</a>
+        </div>
+        <hr>
+    {% endfor %}
+    
+    <!-- Buy button -->
+    <form method="post" action="{% url 'buy_page' %}">
+        {% csrf_token %}
+        <label for="nama_pemesan">Nama Pemesan:</label>
+        <input type="text" name="nama_pemesan" required>
+        <label for="nomor_hp">Nomor HP:</label>
+        <input type="text" name="nomor_hp" required>
+        <button type="submit">Beli</button>
+    </form>
+{% endblock %}

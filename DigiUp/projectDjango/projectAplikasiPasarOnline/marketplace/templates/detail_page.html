@@ -1,0 +1,23 @@
+<!-- marketplace/templates/marketplace/detail_page.html -->
+{% extends 'marketplace/base.html' %}
+
+{% block title %}Detail Page{% endblock %}
+
+{% block content %}
+    <h2>Detail Page</h2>
+    <!-- Display details for Barang -->
+    <h3>{{ barang.nama }}</h3>
+    <p>{{ barang.keterangan }}</p>
+    <p>Harga: Rp. {{ barang.harga }}</p>
+    <img src="{{ barang.gambar.url }}" alt="{{ barang.nama }}" style="max-width: 200px;">
+    <p>Stok: {{ barang.stok }}</p>
+    
+    <!-- Input for the quantity -->
+    <form method="post" action="{% url 'cart_page' %}">
+        {% csrf_token %}
+        <label for="quantity">Jumlah Pesanan:</label>
+        <input type="number" name="quantity" required>
+        <input type="hidden" name="barang_id" value="{{ barang.id }}">
+        <button type="submit">Tambah ke Keranjang</button>
+    </form>
+{% endblock %}

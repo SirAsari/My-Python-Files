@@ -1,0 +1,50 @@
+<!-- marketplace/templates/marketplace/admin_page.html -->
+{% extends 'marketplace/base.html' %}
+
+{% block title %}Admin Page{% endblock %}
+
+{% block content %}
+    <h2>Admin Page</h2>
+    <!-- Form for adding Toko -->
+    <form method="post" action="{% url 'admin_page' %}">
+        {% csrf_token %}
+        <label for="toko_nama">Nama Toko:</label>
+        <input type="text" name="toko_nama" required>
+        <label for="toko_telpon">Nomor Telepon:</label>
+        <input type="text" name="toko_telpon" required>
+        <label for="toko_alamat">Alamat:</label>
+        <textarea name="toko_alamat" required></textarea>
+        <button type="submit">Tambah Toko</button>
+    </form>
+
+    <!-- Form for adding Barang -->
+    <form method="post" action="{% url 'admin_page' %}">
+        {% csrf_token %}
+        <label for="barang_nama">Nama Barang:</label>
+        <input type="text" name="barang_nama" required>
+        <label for="barang_keterangan">Keterangan:</label>
+        <textarea name="barang_keterangan" required></textarea>
+        <label for="barang_harga">Harga:</label>
+        <input type="number" name="barang_harga" required>
+        <label for="barang_gambar">URL Gambar:</label>
+        <input type="text" name="barang_gambar" required>
+        <label for="barang_stok">Stok:</label>
+        <input type="number" name="barang_stok" required>
+        <label for="barang_toko">Toko:</label>
+        <select name="barang_toko" required>
+            {% for toko in tokos %}
+                <option value="{{ toko.id }}">{{ toko.nama }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Tambah Barang</button>
+    </form>
+
+    <!-- Display data nama, nomor hp, dan pesanan -->
+    <h3>Data Pemesan dan Pesanan:</h3>
+    {% for order in orders %}
+        <p>Nama: {{ order.nama }}</p>
+        <p>Nomor HP: {{ order.nomor_hp }}</p>
+        <p>Pesanan: {{ order.pesanan }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}

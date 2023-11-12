@@ -1,0 +1,27 @@
+<!-- marketplace/templates/marketplace/home_page.html -->
+{% extends 'marketplace/base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+    <h2>Home Page</h2>
+    <!-- Search form -->
+    <form method="get" action="{% url 'home_page' %}">
+        <label for="search">Cari Barang:</label>
+        <input type="text" name="search">
+        <button type="submit">Cari</button>
+    </form>
+
+    <!-- Display barang -->
+    {% for barang in barangs %}
+        <div>
+            <h3>{{ barang.nama }}</h3>
+            <p>{{ barang.keterangan }}</p>
+            <p>Harga: Rp. {{ barang.harga }}</p>
+            <img src="{{ barang.gambar.url }}" alt="{{ barang.nama }}" style="max-width: 200px;">
+            <p>Stok: {{ barang.stok }}</p>
+            <a href="{% url 'detail_page' barang.id %}">Detail</a>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
