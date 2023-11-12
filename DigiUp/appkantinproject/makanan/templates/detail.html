@@ -1,16 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card">
-    <img alt="" class="card-img-top" src="{{ book.gambar.url }}" />
-    <div class="card-body">
-        <h5 class="card-title fw-bold">
-            {{ book.judul }} | {{ book.pengarang }} | {{ book.tanggal_rilis|date:"d-m-Y" }}
-        </h5>
-        <p class="card-text">
-            {{ book.sinopsis }}
-            <br />
-            {{ book.isbn }} | {{ book.jumlah_halaman }} | {{ book.publisher.nama }}
-        </p>
-    </div>
-</div>
+<form method="post" action="{% url 'add_to_cart' makanan.id %}">
+    {% csrf_token %}
+    <label for="quantity">Jumlah Pesanan:</label>
+    <input type="number" name="quantity" id="quantity" value="1" min="1">
+    <button type="submit" class="btn btn-success">Pesan</button>
+</form>
 {% endblock content %}

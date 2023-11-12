@@ -22,8 +22,10 @@ from makanan import views as makananView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', makananView.home, name='home'),
-    path('makanan/<int:makanan_id>', makananView.detail,
-         name='detail')
+    path('makanan/<int:makanan_id>', makananView.detail, name='detail'),
+    path('cart/', makananView.view_cart, name='cart'),
+    path('add_to_cart/<int:makanan_id>/', makananView.add_to_cart, name='add_to_cart'),
+    path('remove_from_cart/<int:makanan_id>/', makananView.remove_from_cart, name='remove_from_cart')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

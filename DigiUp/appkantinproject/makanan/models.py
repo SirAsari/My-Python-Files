@@ -16,9 +16,14 @@ class Makanan(models.Model):
     stok = models.IntegerField()
     kantin = models.ForeignKey(Kantin, on_delete=models.CASCADE)
     TERSEDIA = (
-        (1, 'Tersedia'),
-        (0, 'Tidak Tersedia'),
+        ('1', 'Tersedia'),
+        ('0', 'Tidak Tersedia'),
     )
     tersedia = models.CharField(max_length=10, choices=TERSEDIA)
     def __str__(self) -> str:
         return self.nama
+
+class CartItem(models.Model):
+    makanan = models.ForeignKey(Makanan, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    item_total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
